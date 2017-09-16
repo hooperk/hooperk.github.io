@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ceres Map</title>
+<link rel="icon" href="images/TownMapIcon.png">
+<style>
+#descriptions{margin-top:285px;}
+#descriptions > div
+{
+	float:left;
+	width:33%;
+}
+#top{position:fixed;right:5px;top:5px}
+.current
+{
+	border: 1px dashed black;
+}
+.current h3
+{
+	font-style:italic;
+}
+#map
+{
+	position:fixed;
+	top:0px;
+	left:0px;
+	padding-top:5px;
+	padding-left:5px;
+	padding-right:100%;
+	background:white;/*hides items that have been scrolled past*/
+}
+</style>
+<script src="script/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="script/display.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="top">
+	<a href="#map" title="Back to top"><img src="images/TownMapIcon.png" alt="Town Map"></a>
+</div>
+
+<img id="map" src="images/CeresTownMap.png" alt="Ceres" usemap="#routenames">
+
+<map name="routenames">
+	<!--Towns-->
+	<area shape="rect" coords="424,111,438,125" href="#littlerock" title="Littlerock Village" alt="Littlerock Village">
+	<area shape="rect" coords="394,111,408,125" href="#amberleaf" title="Amberleaf Town" alt="Amberleaf Town">
+	<area shape="rect" coords="364,156,378,170" href="#mossridge" title="Mossridge Rown" alt="Mossridge Rown">
+	<area shape="rect" coords="364,81,378,95" href="#siennaridge" title="Siennaridge Town" alt="Siennaridge Town">
+	<area shape="rect" coords="424,171,452,185" href="#colchite" title="Colchite Town" alt="Colchite Town">
+	<area shape="rect" coords="543,200,572,230" href="#magneport" title="Magneport City" alt="Magneport City">
+	<area shape="rect" coords="274,51,303,65" href="#augite" title="Augite Village" alt="Augite Village">
+	<area shape="rect" coords="185,22,199,36" href="#lawngreen" title="Lawngreen Town" alt="Lawngreen Town">
+	<area shape="rect" coords="35,21,50,36" href="#pollucite" title="Pollucite Town" alt="Pollucite Town">
+	<area shape="rect" coords="20,96,35,111" href="#resort" title="Tealstar Resort" alt="Tealstar Resort">
+	<area shape="rect" coords="21,245,50,259" href="#lattulle" title="Lattulle Town" alt="Lattulle Town">
+	<area shape="rect" coords="125,216,154,230" href="#thistlewood" title="Thistlewood Villa" alt="Thistlewood Villa">
+	<area shape="rect" coords="185,141,229,170" href="#petalite" title="Petalite City" alt="Petalite City">
+	<area shape="rect" coords="424,22,453,35" href="#goldbluffs" title="Goldbluffs Town" alt="Goldbluffs Town">
+	<area shape="rect" coords="484,51,513,66" href="#diamondtip" title="Diamondtip City" alt="Diamondtip City">
+	<area shape="rect" coords="499,96,512,110" href="#league" title="League HQ" alt="League HQ">
+	<!--PoI-->
+	<area shape="rect" coords="21,112,35,125" href="#dunes" title="Tealstar Dunes" alt="Tealstar Dunes">
+	<area shape="rect" coords="379,96,393,110" href="#amberridge" title="Amberridge Caves" alt="Amberridge Caves">
+	<area shape="rect" coords="319,81,348,110" href="#greatbark" title="Greatbark Woods" alt="Greatbark Woods">
+	<area shape="rect" coords="245,81,288,96" href="#tauros" title="Tauros Valley" alt="Tauros Valley">
+	<area shape="rect" coords="453,141,468,155" href="#saltstone" title="Saltstone Quarry" alt="Saltstone Quarry">
+	<area shape="rect" coords="200,22,214,36" href="#meadows" title="Lawngreen Meadows" alt="Lawngreen Meadows">
+	<area shape="rect" coords="215,22,229,36" href="#meadows" title="Lawngreen Windfarm" alt="Lawngreen Windfarm">
+	<area shape="rect" coords="140,66,169,95" href="#silvervein" title="Silvervein Lake" alt="Silvervein Lake">
+	<area shape="rect" coords="110,156,124,170" href="#blisterhoof" title="Blisterhoof Ranch" alt="Blisterhoof Ranch">
+	<area shape="rect" coords="80,111,94,125" href="#ruins" title="Ruins of Griph" alt="Ruins of Griph">
+	<area shape="rect" coords="244,186,288,215" href="#topaz" title="Topaz Forest" alt="Topaz Forest">
+	<area shape="rect" coords="470,111,483,125" href="#cliffs" title="Victory Road Cliffs" alt="Victory Road Cliffs">
+	<!--Routes-->
+	<area shape="poly" coords="199,51,199,66,214,66,214,81,229,81,229,96,214,96,214,111,199,111,199,140,214,140,214,125,229,125,229,111,244,111,244,66,229,66,229,51" href="#r1" title="Route 1" alt="Route 1">
+	<area shape="poly" coords="229,155,244,155,244,140,274,140,274,126,334,126,334,111,259,111,259,126,229,126" href="#r2" title="Route 2" alt="Route 2">
+	<area shape="poly" coords="214,171,214,186,200,186,200,201,185,201,185,216,155,215,155,230,199,230,199,215,244,215,244,201,229,201,229,171" href="#r3" title="Route 3" alt="Route 3">
+	<area shape="rect" coords="125,156,184,170" href="#r4" title="Route 4" alt="Route 4">
+	<area shape="rect" coords="289,67,303,110" href="#r5" title="Route 5" alt="Route 5">
+	<area shape="rect" coords="185,37,289,51" href="#r6" title="Route 6" alt="Route 6">
+	<area shape="rect" coords="349,81,363,96" href="#r7" title="Route 7" alt="Route 7">
+	<area shape="rect" coords="364,96,393,125" href="#r8" title="Route 8" alt="Route 8">
+	<area shape="poly" coords="379,126,379,141,364,141,364,155,389,155,393,151,393,140,408,140,408,126" href="#r9" title="Route 9" alt="Route 9">
+	<area shape="rect" coords="364,171,423,185" href="#r10" title="Route 10" alt="Route 10">
+	<area shape="rect" coords="453,156,468,185" href="#r11" title="Route 11" alt="Route 11">
+	<area shape="poly" coords="453,186,453,200,468,200,468,215,483,215,483,230,542,230,542,215,498,215,498,200,483,200,483,186" href="#r12" title="Route 12" alt="Route 12">
+	<area shape="poly" coords="363,156,334,156,334,171,304,171,304,186,289,186,289,200,318,200,319,185,349,185,349,170,363,170" href="#r13" title="Route 13" alt="Route 13">
+	<area shape="poly" coords="124,216,80,216,80,230,35,230,35,244,94,244,94,230,124,230" href="#r14" title="Route 14" alt="Route 14">
+	<area shape="rect" coords="36,111,50,229" href="#r15" title="Route 15" alt="Route 15">
+	<area shape="rect" coords="35,51,50,110" href="#r16" title="Route 16" alt="Route 16">
+	<area shape="rect" coords="35,37,184,50" href="#r17" title="Route 17" alt="Route 17">
+	<area shape="rect" coords="364,66,378,80" href="#r18" title="Route 18" alt="Route 18">
+	<area shape="poly" coords="304,65,394,65,394,80,468,80,468,67,408,67,408,51,304,51" href="#r19" title="Route 19" alt="Route 19">
+	<area shape="rect" coords="439,36,453,66" href="#r20" title="Route 20" alt="Route 20">
+	<area shape="rect" coords="469,67,498,80" href="#r21" title="Route 21" alt="Route 21">
+	<area shape="rect" coords="409,111,423,125" href="#r22" title="Route 22" alt="Route 22">
+	<area shape="poly" coords="139,155,110,155,110,140,65,140,65,125,50,125,50,111,79,111,79,126,124,126,124,141,139,141" href="#r23" title="Route 23" alt="Route 23">
+	<area shape="poly" coords="498,81,469,81,469,125,513,125,513,111,483,111,483,95,498,95" href="#victory" title="Victory Road" alt="Victory Road">
+	<!--regions-->
+	<area shape="poly" coords="462,24,470,85,402,81,382,86,387,94,371,115,398,105,460,110,370,166,392,164,479,122,582,159,584,155,591,33" href="#cuspis" title="Mt. Cuspis" alt="Mt. Cuspis">
+</map>
+<div id="descriptions">
+	<div id="towns">
+		<h2>Towns</h2>
+		<div id="littlerock">
+			<h3>Littlerock Village</h3>
+			<p>The tiny village of nut growers.</p>
+		</div>
+		<div id="amberleaf">
+			<h3>Amberleaf Town</h3>
+			<p>The valley town of flowers.</p>
+			<p>Pokémon Center</p>
+		</div>
+		<div id="mossridge">
+			<h3>Mossridge Town</h3>
+			<p>The quiet stop at the base of Mt. Cuspis.</p>
+			<p>Pokémon Center</p>
+		</div>
+		<div id="siennaridge">
+			<h3>Siennaridge Town</h3>
+			<p>The glade behind the woods.</p>
+			<p>Pokémon Center</p>
+			<p>League Gym</p>
+		</div>
+		<div id="goldbluffs">
+			<h3>Goldbluffs town</h3>
+			<p>The feudal frontier town.</p>
+			<p>Pokémon Center</p>
+			<p>League Gym</p>
+			<p>Contest Hall</p>
+			<p>Goldbluffs Church</p>
+		</div>
+		<div id="colchite">
+			<h3>Colchite Town</h3>
+			<p>Miner town of sturdy determination.</p>
+			<p>Pokémon Center</p>
+			<p>Dojo</p>
+			<p>Fossil Museum<p>
+		</div>
+		<div id="magneport">
+			<h3>Magneport City</h3>
+			<p>A port town full of the smell of the sea.</p>
+			<p>Pokémon Center</p>
+			<p>League Gym</p>
+			<p>Contest Hall</p>
+			<p>Ceres Port</p>
+		</div>
+		<div id="augite">
+			<h3>Augite Village</h3>
+			<p>The peaceful riverside village.</p>
+			<p>Pokémon Center</p>
+			<p>Contest Hall</p>
+			<p>Augite Breeders</p>
+		</div>
+		<div id="lawngreen">
+			<h3>Lawngreen Town</h3>
+			<p>The cliffside hills of green.</p>
+			<p>Pokémon Center</p>
+			<p>League Gym</p>
+		</div>
+		<div id="pollucite">
+			<h3>Pollucite Town</h3>
+			<p>The town built on lava.</p>
+			<p>Pokémon Center</p>
+			<p>League Gym</p>
+			<p>Contest Hall</p>
+			<p>Pollucite Ridge</p>
+		</div>
+		<div id="resort">
+			<h3>Tealstar Resort</h3>
+			<p>The sandy seaside resort.</p>
+			<p>Pokémon Center</p>
+			<p>League Gym</p>
+		</div>
+		<div id="lattulle">
+			<h3>Lattule Town</h3>
+			<p>The fashionable seaside town.</p>
+			<p>Pokémon Center</p>
+			<p>League Gym</p>
+			<p>Contest Hall</p>
+		</div>
+		<div id="thistlewood">
+			<h3>Thistlewood Villa</h3>
+			<p>The hidden seclusion.</p>
+			<p>Pokémon Center</p>
+			<p>League Gym</p>
+			<p>Dojo</p>
+		</div>
+		<div id="petalite">
+			<h3>Petalite City</h3>
+			<p>The glorious centerpiece to Ceres.</p>
+			<p>Pokémon Center</p>
+			<p>Contest Hall</p>
+			<p>Dojo</p>
+			<p>Petalite University</p>
+			<p>Petalite Cathedral</p>
+		</div>
+		<div id="diamondtip">
+			<h3>Diamondtip City</h3>
+			<p>The great mountainside getaway.</p>
+			<p>Pokémon Center</p>
+			<p>League Gym</p>
+			<p>Dojo</p>
+			<p>Diamondtip Slopes</p>
+		</div>
+		<div id="league">
+			<h3>League HQ</h3>
+			<p>Pokémon Center</p>
+		</div>
+	</div>
+	<div id="routes">
+		<h2>Routes</h2>
+		<div id="r1">
+			<h3>Route 1</h3>
+			<p>Winding green route to Lawngreen.</p>
+		</div>
+		<div id="r2">
+			<h3>Route 2</h3>
+			<p>Path that passes the source of Thistlebush River.</p>
+		</div>
+		<div id="r3">
+			<h3>Route 3</h3>
+			<p>Path into Topaz Forest.</p>
+		</div>
+		<div id="r4">
+			<h3>Route 4</h3>
+			<p>Route across the Ceres Plains.</p>
+		</div>
+		<div id="r5">
+			<h3>Route 5</h3>
+			<p>The quickest way from greatbark to Augite.</p>
+		</div>
+		<div id="r6">
+			<h3>Route 6</h3>
+			<p>A riverside walk through the meadows.</p>
+		</div>
+		<div id="r7">
+			<h3>Route 7</h3>
+			<p>The path into the woods.</p>
+		</div>
+		<div id="r8">
+			<h3>Route 8</h3>
+			<p>Hilly path across Amberridge.</p>
+			<p>Amberridge</p>
+		</div>
+		<div id="r9">
+			<h3>Route 9</h3>
+			<p>The path into Amber Vale.</p>
+		</div>
+		<div id="r10">
+			<h3>Route 10</h3>
+			<p>Mossy rock path.</p>
+		</div>
+		<div id="r11">
+			<h3>Route 11</h3>
+			<p>Old quarry road.</p>
+		</div>
+		<div id="r12">
+			<h3>Route 12</h3>
+			<p>Coastal path to Magneport.</p>
+		</div>
+		<div id="r13">
+			<h3>Route 13</h3>
+			<p>Winding path into the depths of the forest.</p>
+		</div>
+		<div id="r14">
+			<h3>Route 14</h3>
+			<p>Path into the depths of the jungle.</p>
+		</div>
+		<div id="r15">
+			<h3>Route 15</h3>
+			<p>Route that passes through dying trees and growing desert.</p>
+		</div>
+		<div id="r16">
+			<h3>Route 16</h3>
+			<p>The path that crosses nothing but sand and rock.</p>
+		</div>
+		<div id="r17">
+			<h3>Route 17</h3>
+			<p>The cliffside desert.</p>
+		</div>
+		<div id="r18">
+			<h3>Route 18</h3>
+			<p>The link between rivers.</p>
+			<p>Siennaridge</p>
+		</div>
+		<div id="r19">
+			<h3>Route 19</h3>
+			<p>The riverside approach to Mt. Cuspis.</p>
+			<p>Florentine River</p>
+		</div>
+		<div id="r20">
+			<h3>Route 20</h3>
+			<p>The road to the town on the edge.</p>
+		</div>
+		<div id="r21">
+			<h3>Route 21</h3>
+			<p>A series of paths and caves that lead up the mountain.</p>
+		</div>
+		<div id="r22">
+			<h3>Route 22</h3>
+			<p>The valley walk.</p>
+		</div>
+		<div id="r23">
+			<h3>Route 23</h3>
+			<p>Path across where plains meets desert</p>
+		</div>
+		<div id="victory">
+			<h3>Victory Road</h3>
+			<p>Challengers' Final challenge before facing The League.</p>
+		</div>
+	</div>
+	<div id="poi">
+		<h2>Places of Interest</h2>
+		<div id="amberridge">
+			<h3>Amberridge Caves</h3>
+			<p>Dark, unlit caves through Amberridge following natural caverns carved by the Fuderunt River.</p>
+		</div>
+		<div id="greatbark">
+			<h3>Greatbark Woods</h3>
+			<p>Thick woods teeming with life. The Fuderunt River flows through the forest to Greatbark Lake.</p>
+		</div>
+		<div id="tauros">
+			<h3>Tauros Valley</h3>
+			<p>A deep ravine carved out in the plains of Ceres, it is a known danger zone for Pokémon stampedes.</p>
+		</div>
+		<div id="saltstone">
+			<h3>Saltstone Quarry</h3>
+			<p>A stone quarry frequently plundered for fossils. Colchite has opened an area away from stonework for trainers to dig.</p>
+		</div>
+		<div id="meadows">
+			<h3>Lawngreen Meadows and Windfarm</h3>
+			<p>Wind turbines dot these cliffside meadows.</p>
+			<p>Pokéfarms</p>
+		</div>
+		<div id="silvervein">
+			<h3>Silvervein Lake</h3>
+			<p>Huge lake in the middle of Ceres Plains. It is fed by underground rivers.</p>
+		</div>
+		<div id="blisterhoof">
+			<h3>Blisterhoof Ranch</h3>
+			<p>Pokeranch that trains Pokemon capable of traversing plains and desert.</p>
+			<p>Hoofprint Pond</p>
+		</div>
+		<div id="ruins">
+			<h3>Ruins of Griph</h3>
+			<p>The ruins of an ancient city, destroyed by a past eruption and mostly reclaimed by the desert.</p>
+		</div>
+		<div id="dunes">
+			<h3>Tealstar Dunes</h3>
+			<p>Seaside beaches and sand dunes used as a get away</p>
+		</div>
+		<div id="topaz">
+			<h3>Topaz Forest</h3>
+			<p>Spanning half of Ceres, Topaz Forest is full of jungle and forest life. Somewhere in the eastern part ancient tombs are said to be hidden.</p>
+		</div>
+		<div id="cliffs">
+			<h3>Victory Road Cliffside</h3>
+			<p>Cliffs overlooking most of Ceres. A glorious view before the final challenges.</p>
+		</div>
+		<div id="cuspis">
+			<h3>Mount Cuspis</h3>
+			<p>Huge pyramidal peak, long since carved out by glacial ice. This has left most of the inclines incredibly steep.</p>
+		</div>
+	</div>
+</div>
+</body>
