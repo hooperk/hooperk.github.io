@@ -14,7 +14,10 @@
 #top{position:fixed;right:5px;top:5px}
 .current
 {
-	border: 1px dashed black;
+	position: fixed;
+	top: 40px;
+	left: 620px;
+	border: 1px black;
 }
 .current h3
 {
@@ -29,6 +32,13 @@
 	padding-left:5px;
 	padding-right:100%;
 	background:white;/*hides items that have been scrolled past*/
+}
+header
+{
+	position: fixed;
+	top: 0px;
+	left: 620px;
+	font-weight: bold;
 }
 </style>
 <script src="script/jquery-1.11.3.min.js" type="text/javascript"></script>
@@ -100,6 +110,7 @@
 	<!--regions-->
 	<area shape="poly" coords="462,24,470,85,402,81,382,86,387,94,371,115,398,105,460,110,370,166,392,164,479,122,582,159,584,155,591,33" href="#cuspis" title="Mt. Cuspis" alt="Mt. Cuspis">
 </map>
+<header><p>Selected:</p></header>
 <div id="descriptions">
 	<div id="towns">
 		<h2>Towns</h2>
